@@ -1,0 +1,5 @@
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+## Check Envio de Correos Minuto a Minuto
+* * * * * root pgrep -f '/usr/bin/fetchmail -d' > /dev/null 2>&1 || (/usr/bin/fetchmail -d 300

@@ -1,0 +1,36 @@
+SHELL=/bin/bash
+LOGFILE=/var/log/procmail.log
+MAILDIR=/var/mail/acme
+DEFAULT=$MAILDIR/
+ORGMAIL=$MAILDIR/
+LOGABSTRACT=all
+
+:0
+* ^From:.*jose@acme.com.py
+* ^Subject:.*Reiniciar-Apache
+{
+    LOG="Correo de jose@dominioempresa.com.py con asunto Reiniciar-Apache. Ejecutando script...\n"
+    :0
+    | /sbin/apache_reboot.sh
+}
+
+:0
+* ^From:.*pedro@acme.com.py
+* ^Subject:.*Reiniciar-Tomcat
+{
+    LOG="Correo de pedro@dominioempresa.com.py con asunto Reiniciar-Tomcat. Ejecutando script...\n"
+    :0
+    | /sbin/tomcat_reboot.sh
+}
+
+:0
+* ^From:.*angel@acme.com.py
+* ^Subject:.*Reiniciar-Servidor
+{
+    LOG="Correo de angel@dominioempresa.com.py con asunto Reiniciar-Servidor. Ejecutando script...\n"
+    :0
+    | /sbin/server_reboot.sh
+}
+
+:0
+$DEFAULT
